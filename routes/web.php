@@ -3,6 +3,7 @@
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\CustomerController;
 use App\Http\Controllers\EmployeesController;
+use App\Http\Controllers\IdentityController;
 use App\Http\Controllers\PermissionController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\RoleController;
@@ -26,8 +27,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
     // 3. CLIENTES Y PROVEEDORES
     Route::resource('clientes', CustomerController::class)->only(['index', 'create', 'edit']);
     Route::resource('proveedores', SupplierController::class)->only(['index', 'create', 'edit']);
-    Route::get('api/catalogs/categories', [CategoryController::class, 'options'])->name('api.catalogs.categories');
-    Route::get('api/catalogs/suppliers', [SupplierController::class, 'options'])->name('api.catalogs.suppliers');
+    Route::resource('identidades', IdentityController::class)->only(['index', 'create', 'edit']);
 
     // 4. CATALOGO DE PRODUCTOS
     Route::resource('categorias', CategoryController::class)->only(['index']);

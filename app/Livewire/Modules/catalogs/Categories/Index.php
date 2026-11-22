@@ -98,6 +98,8 @@ class Index extends Component
 
         try {
             $category->delete();
+            $this->dispatch('pg:eventRefresh-categoryTable');
+
         } catch (Throwable) {
             Flux::toast(
                 heading: 'No se puede eliminar',
