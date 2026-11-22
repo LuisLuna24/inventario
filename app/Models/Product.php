@@ -9,7 +9,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\MorphMany;
 
-#[Fillable(['category_id', 'supplier_id', 'name', 'description', 'sku', 'barcode', 'price', 'cost', 'apply_iva', 'cost_package', 'units_package', 'min_stock', 'porcent', 'is_layaway_allowed', 'is_returnable', 'is_active'])]
+#[Fillable(['category_id', 'supplier_id', 'name', 'description', 'sku', 'barcode', 'price', 'cost', 'apply_iva', 'cost_iva', 'cost_package', 'units_package', 'min_stock', 'porcent', 'is_layaway_allowed', 'is_returnable', 'is_active'])]
 class Product extends Model
 {
     protected function casts(): array

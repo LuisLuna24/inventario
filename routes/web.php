@@ -26,10 +26,12 @@ Route::middleware(['auth', 'verified'])->group(function () {
     // 3. CLIENTES Y PROVEEDORES
     Route::resource('clientes', CustomerController::class)->only(['index', 'create', 'edit']);
     Route::resource('proveedores', SupplierController::class)->only(['index', 'create', 'edit']);
+    Route::get('api/catalogs/categories', [CategoryController::class, 'options'])->name('api.catalogs.categories');
+    Route::get('api/catalogs/suppliers', [SupplierController::class, 'options'])->name('api.catalogs.suppliers');
 
     // 4. CATALOGO DE PRODUCTOS
     Route::resource('categorias', CategoryController::class)->only(['index']);
-    Route::resource('productos', ProductController::class)->only(['index']);
+    Route::resource('productos', ProductController::class)->only(['index', 'create', 'edit']);
 });
 
 require __DIR__.'/settings.php';

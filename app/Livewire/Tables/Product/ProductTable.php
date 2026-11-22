@@ -67,11 +67,6 @@ final class ProductTable extends PowerGridComponent
         ];
     }
 
-    public function edit(int|string $rowId): void
-    {
-        $this->dispatch('edit-product', rowId: $rowId);
-    }
-
     public function delete(int|string $rowId): void
     {
         $this->dispatch('delete-product', rowId: $rowId);

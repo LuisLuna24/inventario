@@ -1,6 +1,7 @@
 <?php
 
 use App\Livewire\Modules\catalogs\Categories\Index as CategoryIndex;
+use App\Livewire\Modules\catalogs\Products\Form as ProductForm;
 use App\Livewire\Modules\catalogs\Products\Index as ProductIndex;
 use App\Livewire\Modules\catalogs\Warehouses\Index as WarehouseIndex;
 use App\Models\Category;
@@ -53,34 +54,36 @@ test('a category with products cannot be deleted', function () {
     expect($category->fresh())->not->toBeNull();
 });
 
-test('a product can be created and edited with all commercial fields', function () {
-    $category = Category::create(['name' => 'Papelería', 'porcent' => 0]);
+test('a product can be created and edited with calculated commercial fields', function () {
+    $category = Category::create(['name' => 'Papelería', 'porcent' => 20]);
     $supplier = Supplier::create(['name' => 'Proveedor central']);
 
-    Livewire::test(ProductIndex::class)
+    Livewire::test(ProductForm::class)
         ->set('categoryId', $category->id)
         ->set('supplierId', $supplier->id)
         ->set('name', 'Papel adhesivo')
         ->set('description', 'Paquete de prueba')
         ->set('sku', 'PA-001')
         ->set('barcode', '750000000001')
-        ->set('price', '120.50')
-        ->set('cost', '80.2500')
         ->set('applyIva', true)
         ->set('costPackage', '802.5000')
         ->set('unitsPackage', '10.000')
         ->set('minStock', '2.000')
-        ->set('porcent', 20)
         ->set('isLayawayAllowed', true)
         ->set('isReturnable', true)
         ->set('isActive', true)
         ->call('submit')
-        ->assertHasNoErrors();
+        ->assertHasNoErrors()
+        ->assertRedirect(route('productos.index'));
 
     $product = Product::where('sku', 'PA-001')->firstOrFail();
 
-    Livewire::test(ProductIndex::class)
-        ->call('edit', $product->id)
+    expect($product->cost)->toBe('80.2500')
+        ->and($product->cost_iva)->toBe('93.0900')
+        ->and($product->price)->toBe('116.36')
+        ->and($product->porcent)->toBe(20);
+
+    Livewire::test(ProductForm::class, ['product' => $product])
         ->set('name', 'Papel adhesivo premium')
         ->call('submit')
         ->assertHasNoErrors();
@@ -101,12 +104,45 @@ test('product relationships and unique identifiers are validated', function () {
         'porcent' => 0,
     ]);
 
-    Livewire::test(ProductIndex::class)
+    Livewire::test(ProductForm::class)
         ->set('categoryId', 999999)
         ->set('name', 'Duplicado')
         ->set('sku', 'SKU-UNICO')
         ->call('submit')
         ->assertHasErrors(['categoryId' => 'exists', 'sku' => 'unique']);
+});
+
+test('a category percentage is prefilled and can be overridden', function () {
+    $category = Category::create(['name' => 'Margen especial', 'porcent' => 25]);
+
+    Livewire::test(ProductForm::class)
+        ->set('categoryId', $category->id)
+        ->assertSet('porcent', 25)
+        ->set('porcent', 30)
+        ->assertSet('porcent', 30);
+});
+
+test('product price calculations support products without iva', function () {
+    Livewire::test(ProductForm::class)
+        ->set('cost', '75.0000')
+        ->set('porcent', 25)
+        ->set('applyIva', false)
+        ->assertSet('costIva', '75.0000')
+        ->assertSet('price', '100.00');
+});
+
+test('product margin and package units are validated', function () {
+    Livewire::test(ProductForm::class)
+        ->set('costPackage', '100')
+        ->set('unitsPackage', '0')
+        ->set('porcent', 100)
+        ->call('submit')
+        ->assertHasErrors(['unitsPackage' => 'gt', 'porcent' => 'lt']);
+
+    Livewire::test(ProductForm::class)
+        ->set('unitsPackage', '10')
+        ->call('submit')
+        ->assertHasErrors(['costPackage' => 'required_with']);
 });
 
 test('a product with stock cannot be deleted', function () {
