@@ -22,6 +22,7 @@ return new class extends Migration
             $table->decimal('price', 14, 2)->default(0);
             $table->decimal('cost', 14, 4)->default(0);
             $table->boolean('apply_iva')->default(true);
+            $table->decimal('cost_iva', 14, 4)->nullable();
             $table->decimal('cost_package', 14, 4)->nullable();
             $table->decimal('units_package', 14, 3)->nullable();
             $table->decimal('min_stock', 14, 3)->default(1);

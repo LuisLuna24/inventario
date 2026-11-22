@@ -8,7 +8,6 @@ use App\Http\Controllers\ProductController;
 use App\Http\Controllers\RoleController;
 use App\Http\Controllers\SupplierController;
 use App\Http\Controllers\WarehousesController;
-use App\Models\Customer;
 use Illuminate\Support\Facades\Route;
 
 Route::view('/', 'welcome')->name('home');
@@ -16,8 +15,8 @@ Route::view('/', 'welcome')->name('home');
 Route::middleware(['auth', 'verified'])->group(function () {
     Route::view('dashboard', 'dashboard')->name('dashboard');
 
-    // 1. SUCURSALES
-    Route::resource('almacenes', WarehousesController::class)->only(['index', 'create', 'edit']);
+    // 1. ALMACENES
+    Route::resource('almacenes', WarehousesController::class)->only(['index']);
 
     // 2. USUARIOS
     Route::resource('empleados', EmployeesController::class)->only(['index', 'create', 'edit']);
@@ -29,8 +28,8 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::resource('proveedores', SupplierController::class)->only(['index', 'create', 'edit']);
 
     // 4. CATALOGO DE PRODUCTOS
-    Route::resource('categorias', CategoryController::class)->only(['index', 'create', 'edit']);
-    Route::resource('productos', ProductController::class)->only(['index', 'create', 'edit']);
+    Route::resource('categorias', CategoryController::class)->only(['index']);
+    Route::resource('productos', ProductController::class)->only(['index']);
 });
 
-require __DIR__ . '/settings.php';
+require __DIR__.'/settings.php';

@@ -18,6 +18,7 @@ class Product extends Model
             'price' => 'decimal:2',
             'cost' => 'decimal:4',
             'apply_iva' => 'boolean',
+            'cost_iva' => 'decimal:4',
             'cost_package' => 'decimal:4',
             'units_package' => 'decimal:3',
             'min_stock' => 'decimal:3',
@@ -27,11 +28,13 @@ class Product extends Model
         ];
     }
 
+    /** @return BelongsTo<Category, $this> */
     public function category(): BelongsTo
     {
         return $this->belongsTo(Category::class);
     }
 
+    /** @return BelongsTo<Supplier, $this> */
     public function supplier(): BelongsTo
     {
         return $this->belongsTo(Supplier::class);

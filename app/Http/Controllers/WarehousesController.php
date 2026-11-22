@@ -2,22 +2,12 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
+use Illuminate\Contracts\View\View;
 
 class WarehousesController extends Controller
 {
-    public function index()
+    public function index(): View
     {
-        return view("modules.warehouses.warehouses.index");
-    }
-
-    public function create()
-    {
-        return view("modules.warehouses.warehouses.form");
-    }
-
-    public function edit($id)
-    {
-        return view("modules.warehouses.warehouses.form", compact("id"));
+        return view('modules.catalogs.warehouses.index');
     }
 }
