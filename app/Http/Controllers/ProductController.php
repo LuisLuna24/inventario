@@ -17,10 +17,10 @@ class ProductController extends Controller
         return view('modules.catalogs.products.form');
     }
 
-    public function edit(Product $producto): View
+    public function edit(Product $product): View
     {
         return view('modules.catalogs.products.form', [
-            'product' => $producto,
+            'product' => $product,
         ]);
     }
 }

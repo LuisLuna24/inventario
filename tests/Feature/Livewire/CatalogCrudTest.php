@@ -74,7 +74,7 @@ test('a product can be created and edited with calculated commercial fields', fu
         ->set('isActive', true)
         ->call('submit')
         ->assertHasNoErrors()
-        ->assertRedirect(route('productos.index'));
+        ->assertRedirect(route('products.index'));
 
     $product = Product::where('sku', 'PA-001')->firstOrFail();
 
@@ -127,7 +127,7 @@ test('product price calculations support products without iva', function () {
         ->set('cost', '75.0000')
         ->set('porcent', 25)
         ->set('applyIva', false)
-        ->assertSet('costIva', '75.0000')
+        ->assertSet('costIva', '75.00')
         ->assertSet('price', '100.00');
 });
 

@@ -184,7 +184,7 @@ class Form extends Component
                 variant: 'success',
             );
 
-            $this->redirectRoute('productos.index', navigate: true);
+            $this->redirectRoute('products.index', navigate: true);
         } catch (Throwable) {
             Flux::toast(
                 heading: 'Ocurrió un error',

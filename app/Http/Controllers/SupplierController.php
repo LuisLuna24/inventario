@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Supplier;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
+use Illuminate\View\View;
 
 class SupplierController extends Controller
 {
@@ -12,6 +13,18 @@ class SupplierController extends Controller
     public function index()
     {
         return view('modules.peoples.suppliers.index');
+    }
+
+    public function create(): View
+    {
+        return view('modules.peoples.suppliers.form');
+    }
+
+    public function edit(Supplier $supplier): View
+    {
+        return view('modules.peoples.suppliers.form', [
+            'supplierBeingEdited' => $supplier,
+        ]);
     }
 
     public function options(Request $request): JsonResponse

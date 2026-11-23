@@ -1,5 +1,5 @@
-<div class="mx-auto max-w-7xl space-y-6">
-    <div class="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
+<x-card>
+    <div class="flex flex-col gap-4 mb-4 sm:flex-row sm:items-center sm:justify-between">
         <div>
             <h1 class="text-2xl font-bold text-gray-950 dark:text-white">
                 {{ $product ? __('Editar producto') : __('Nuevo producto') }}
@@ -10,7 +10,7 @@
             </p>
         </div>
 
-        <x-w-button label="Volver al catálogo" icon="arrow-left" flat :href="route('productos.index')" wire:navigate />
+        <x-w-button label="Volver al catálogo" icon="arrow-left" flat :href="route('products.index')" wire:navigate />
     </div>
 
     <form wire:submit="submit" class="space-y-6">
@@ -105,7 +105,7 @@
 
         <div
             class="flex flex-col-reverse gap-3 border-t border-gray-200 pt-5 dark:border-gray-700 sm:flex-row sm:justify-end">
-            <x-w-button label="Cancelar" flat :href="route('productos.index')" wire:navigate />
+            <x-w-button label="Cancelar" flat :href="route('products.index')" wire:navigate />
             <x-w-button label="Guardar producto" icon="check" primary type="submit" spinner="submit"
                 wire:loading.attr="disabled" wire:target="submit" />
         </div>

@@ -22,39 +22,39 @@
             </flux:sidebar.group>
             <flux:sidebar.group expandable icon="list-bullet" heading="Catalogos" class="grid"
                 :expanded="request()->routeIs([
-                                        'categorias.index',
-                                        'productos.index',
-                                        'almacenes.index'
+                                        'categories.index',
+                                        'products.*',
+                                        'warehouses.index'
                                     ])">
-                <flux:sidebar.item icon="swatch" :href="route('categorias.index')"
-                    :current="request()->routeIs('categorias.index')" wire:navigate>
+                <flux:sidebar.item icon="swatch" :href="route('categories.index')"
+                    :current="request()->routeIs('categories.index')" wire:navigate>
                     Categorías
                 </flux:sidebar.item>
-                <flux:sidebar.item icon="cube" :href="route('productos.index')"
-                    :current="request()->routeIs('productos.index')" wire:navigate>
+                <flux:sidebar.item icon="cube" :href="route('products.index')"
+                    :current="request()->routeIs('products.*')" wire:navigate>
                     Productos
                 </flux:sidebar.item>
-                <flux:sidebar.item icon="building-storefront" :href="route('almacenes.index')"
-                    :current="request()->routeIs('almacenes.index')" wire:navigate>
+                <flux:sidebar.item icon="building-storefront" :href="route('warehouses.index')"
+                    :current="request()->routeIs('warehouses.index')" wire:navigate>
                     Almacenes
                 </flux:sidebar.item>
             </flux:sidebar.group>
             <flux:sidebar.group expandable icon="users" heading="Clientes y Proveedores" class="grid"
                 :expanded="request()->routeIs([
-                                        'clientes.index',
-                                        'proveedores.index',
-                                        'identidades.index'
+                                        'customers.*',
+                                        'suppliers.*',
+                                        'identities.index'
                                     ])">
-                <flux:sidebar.item icon="document-text" :href="route('identidades.index')"
-                    :current="request()->routeIs('identidades.index')" wire:navigate>
+                <flux:sidebar.item icon="document-text" :href="route('identities.index')"
+                    :current="request()->routeIs('identities.index')" wire:navigate>
                     Identidades
                 </flux:sidebar.item>
-                <flux:sidebar.item icon="user" :href="route('clientes.index')"
-                    :current="request()->routeIs('clientes.index')" wire:navigate>
+                <flux:sidebar.item icon="user" :href="route('customers.index')"
+                    :current="request()->routeIs('customers.*')" wire:navigate>
                     Clientes
                 </flux:sidebar.item>
-                <flux:sidebar.item icon="user" :href="route('proveedores.index')"
-                    :current="request()->routeIs('proveedores.index')" wire:navigate>
+                <flux:sidebar.item icon="user" :href="route('suppliers.index')"
+                    :current="request()->routeIs('suppliers.*')" wire:navigate>
                     Proveedores
                 </flux:sidebar.item>
             </flux:sidebar.group>
