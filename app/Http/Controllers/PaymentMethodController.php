@@ -6,5 +6,8 @@ use Illuminate\Http\Request;
 
 class PaymentMethodController extends Controller
 {
-    //
+    public function index()
+    {
+        return view('modules.catalogs.methods.index');
+    }
 }
