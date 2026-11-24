@@ -4,11 +4,13 @@ use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\CustomerController;
 use App\Http\Controllers\EmployeesController;
 use App\Http\Controllers\IdentityController;
+use App\Http\Controllers\PaymentMethodController;
 use App\Http\Controllers\PermissionController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\RoleController;
 use App\Http\Controllers\SupplierController;
 use App\Http\Controllers\WarehousesController;
+use App\Http\Controllers\CashRegisterController;
 use Illuminate\Support\Facades\Route;
 
 Route::view('/', 'welcome')->name('home');
@@ -18,6 +20,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
 
     // 1. WAREHOUSES
     Route::resource('warehouses', WarehousesController::class)->only(['index']);
+    Route::resource('cash-registers', CashRegisterController::class)->only(['index', 'show']);
 
     // 2. USERS
     Route::resource('employees', EmployeesController::class)->only(['index', 'create', 'edit']);
@@ -32,6 +35,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
     // 4. PRODUCT CATALOG
     Route::resource('categories', CategoryController::class)->only(['index']);
     Route::resource('products', ProductController::class)->only(['index', 'create', 'edit']);
+    Route::resource('methods', PaymentMethodController::class)->only(['index']);
 });
 
 require __DIR__.'/settings.php';

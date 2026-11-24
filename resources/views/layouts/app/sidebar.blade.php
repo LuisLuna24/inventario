@@ -19,13 +19,22 @@
                     wire:navigate>
                     {{ __('Dashboard') }}
                 </flux:sidebar.item>
+                <flux:sidebar.item icon="banknotes" :href="route('cash-registers.index')" :current="request()->routeIs('cash-registers.*')"
+                    wire:navigate>
+                    {{ __('Cajas') }}
+                </flux:sidebar.item>
             </flux:sidebar.group>
             <flux:sidebar.group expandable icon="list-bullet" heading="Catalogos" class="grid"
                 :expanded="request()->routeIs([
                                         'categories.index',
                                         'products.*',
-                                        'warehouses.index'
+                                        'warehouses.index',
+                                        'methods.index'
                                     ])">
+                <flux:sidebar.item icon="credit-card" :href="route('methods.index')"
+                    :current="request()->routeIs('methods.index')" wire:navigate>
+                    Metodos de Pago
+                </flux:sidebar.item>
                 <flux:sidebar.item icon="swatch" :href="route('categories.index')"
                     :current="request()->routeIs('categories.index')" wire:navigate>
                     Categorías
