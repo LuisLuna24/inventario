@@ -6,10 +6,13 @@ use Illuminate\Database\Eloquent\Attributes\Fillable;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 
 #[Fillable(['supplier_id', 'warehouse_id', 'voucher_type', 'serie', 'correlative', 'date', 'total', 'observation', 'status'])]
 class PurchaseOrder extends Model
 {
+    public const STATUS_PURCHASED = 'purchased';
+
     protected function casts(): array
     {
         return [
@@ -36,5 +39,10 @@ class PurchaseOrder extends Model
     public function purchases(): HasMany
     {
         return $this->hasMany(Purchase::class);
+    }
+
+    public function purchase(): HasOne
+    {
+        return $this->hasOne(Purchase::class);
     }
 }

@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\CashRegisterController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\CustomerController;
 use App\Http\Controllers\EmployeesController;
@@ -7,10 +8,10 @@ use App\Http\Controllers\IdentityController;
 use App\Http\Controllers\PaymentMethodController;
 use App\Http\Controllers\PermissionController;
 use App\Http\Controllers\ProductController;
+use App\Http\Controllers\PurchaseController;
 use App\Http\Controllers\RoleController;
 use App\Http\Controllers\SupplierController;
 use App\Http\Controllers\WarehousesController;
-use App\Http\Controllers\CashRegisterController;
 use Illuminate\Support\Facades\Route;
 
 Route::view('/', 'welcome')->name('home');
@@ -36,6 +37,9 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::resource('categories', CategoryController::class)->only(['index']);
     Route::resource('products', ProductController::class)->only(['index', 'create', 'edit']);
     Route::resource('methods', PaymentMethodController::class)->only(['index']);
+
+    // 5. PURCHASES
+    Route::resource('purchases', PurchaseController::class)->only(['index', 'create', 'edit', 'show']);
 });
 
 require __DIR__.'/settings.php';

@@ -23,6 +23,10 @@
                     wire:navigate>
                     {{ __('Cajas') }}
                 </flux:sidebar.item>
+                <flux:sidebar.item icon="shopping-cart" :href="route('purchases.index')" :current="request()->routeIs('purchases.*')"
+                    wire:navigate>
+                    {{ __('Compras') }}
+                </flux:sidebar.item>
             </flux:sidebar.group>
             <flux:sidebar.group expandable icon="list-bullet" heading="Catalogos" class="grid"
                 :expanded="request()->routeIs([

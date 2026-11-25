@@ -53,6 +53,11 @@ class CashSession extends Model
         return $this->hasMany(SalePayment::class);
     }
 
+    public function purchasePayments(): HasMany
+    {
+        return $this->hasMany(PurchasePayment::class);
+    }
+
     public function cashMovements(): HasMany
     {
         return $this->hasMany(CashMovement::class);
