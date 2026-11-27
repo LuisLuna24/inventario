@@ -10,6 +10,10 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 #[Fillable(['quote_id', 'customer_id', 'warehouse_id', 'cash_session_id', 'layaway_id', 'created_by', 'voucher_type', 'serie', 'correlative', 'date', 'subtotal', 'discount_total', 'tax_total', 'total', 'status', 'observation'])]
 class Sale extends Model
 {
+    public const STATUS_COMPLETED = 'completed';
+
+    public const STATUS_CANCELLED = 'cancelled';
+
     protected function casts(): array
     {
         return [
@@ -64,5 +68,10 @@ class Sale extends Model
     public function returns(): HasMany
     {
         return $this->hasMany(SaleReturn::class);
+    }
+
+    public function getFolioAttribute(): string
+    {
+        return $this->serie.'-'.$this->correlative;
     }
 }

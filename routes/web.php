@@ -9,6 +9,8 @@ use App\Http\Controllers\PaymentMethodController;
 use App\Http\Controllers\PermissionController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\PurchaseController;
+use App\Http\Controllers\QuoteController;
+use App\Http\Controllers\SaleController;
 use App\Http\Controllers\RoleController;
 use App\Http\Controllers\SupplierController;
 use App\Http\Controllers\WarehousesController;
@@ -40,6 +42,12 @@ Route::middleware(['auth', 'verified'])->group(function () {
 
     // 5. PURCHASES
     Route::resource('purchases', PurchaseController::class)->only(['index', 'create', 'edit', 'show']);
+
+    // 6. QUOTES AND SALES
+    Route::resource('quotes', QuoteController::class)->only(['index', 'create', 'edit']);
+    Route::get('sales', [SaleController::class, 'index'])->name('sales.index');
+    Route::get('sales/create/{quote?}', [SaleController::class, 'create'])->name('sales.create');
+    Route::post('sales/{sale}/cancel', [SaleController::class, 'cancel'])->name('sales.cancel');
 });
 
 require __DIR__.'/settings.php';

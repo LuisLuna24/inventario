@@ -185,7 +185,8 @@ class Form extends Component
             );
 
             $this->redirectRoute('products.index', navigate: true);
-        } catch (Throwable) {
+        } catch (Throwable $e) {
+            dd($e);
             Flux::toast(
                 heading: 'Ocurrió un error',
                 text: 'No se pudo guardar el producto. Inténtalo nuevamente.',

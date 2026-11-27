@@ -27,6 +27,12 @@
                     wire:navigate>
                     {{ __('Compras') }}
                 </flux:sidebar.item>
+                <flux:sidebar.item icon="document-text" :href="route('quotes.index')" :current="request()->routeIs('quotes.*')" wire:navigate>
+                    Presupuestos
+                </flux:sidebar.item>
+                <flux:sidebar.item icon="shopping-bag" :href="route('sales.index')" :current="request()->routeIs('sales.*')" wire:navigate>
+                    Ventas
+                </flux:sidebar.item>
             </flux:sidebar.group>
             <flux:sidebar.group expandable icon="list-bullet" heading="Catalogos" class="grid"
                 :expanded="request()->routeIs([
